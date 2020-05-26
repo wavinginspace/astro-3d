@@ -61,7 +61,7 @@ function init() {
     sunColor: 0xffffff,
     waterColor: 0x001e0f,
     distortionScale: 3.7,
-    fog: scene.fog !== undefined,
+    fog: scene.fog !== undefined
   });
 
   water.rotation.x = -Math.PI / 2;
@@ -83,8 +83,62 @@ function init() {
   var parameters = {
     distance: 400,
     inclination: 0.25,
-    azimuth: 0.0375,
+    azimuth: 0.0375
   };
+
+  let hour = new Date().getHours();
+
+  checkSun();
+
+  setInterval(() => {
+    if (hour < 24) {
+      hour += 1;
+    } else {
+      hour = 0;
+    }
+    checkSun();
+  }, 300);
+
+  function checkSun() {
+    if (hour >= 21 || hour <= 6) {
+      parameters = { ...parameters, azimuth: 0.5118 };
+      console.log('true');
+    } else if (hour > 6 && hour <= 7) {
+      parameters = { ...parameters, azimuth: 0.0155 };
+    } else if (hour > 7 && hour <= 8) {
+      parameters = { ...parameters, azimuth: 0.0265 };
+    } else if (hour > 8 && hour <= 9) {
+      parameters = { ...parameters, azimuth: 0.0375 };
+    } else if (hour > 9 && hour <= 10) {
+      parameters = { ...parameters, azimuth: 0.065 };
+    } else if (hour > 10 && hour <= 11) {
+      parameters = { ...parameters, azimuth: 0.09 };
+    } else if (hour > 11 && hour <= 12) {
+      parameters = { ...parameters, azimuth: 0.11 };
+    } else if (hour > 12 && hour <= 13) {
+      parameters = { ...parameters, azimuth: 0.15 };
+    } else if (hour > 13 && hour <= 14) {
+      parameters = { ...parameters, azimuth: 0.2 };
+    } else if (hour > 14 && hour <= 15) {
+      parameters = { ...parameters, azimuth: 0.25 };
+    } else if (hour > 14 && hour <= 15) {
+      parameters = { ...parameters, azimuth: 0.3 };
+    } else if (hour > 15 && hour <= 16) {
+      parameters = { ...parameters, azimuth: 0.35 };
+    } else if (hour > 16 && hour <= 17) {
+      parameters = { ...parameters, azimuth: 0.4 };
+    } else if (hour > 17 && hour <= 18) {
+      parameters = { ...parameters, azimuth: 0.43 };
+    } else if (hour > 18 && hour <= 19) {
+      parameters = { ...parameters, azimuth: 0.46 };
+    } else if (hour > 19 && hour <= 20) {
+      parameters = { ...parameters, azimuth: 0.475 };
+    } else if (hour > 20 && hour <= 21) {
+      parameters = { ...parameters, azimuth: 0.49 };
+    }
+  }
+
+  console.log(hour);
 
   var cubeCamera = new THREE.CubeCamera(0.1, 1, 512);
   cubeCamera.renderTarget.texture.generateMipmaps = true;
@@ -141,7 +195,7 @@ function init() {
     flatShading: true,
     envMap: cubeCamera.renderTarget.texture,
     side: THREE.DoubleSide,
-    map: loader.load('./images/astrosquarenew.png'),
+    map: loader.load('./images/astrosquarenew.png')
   });
 
   sphere = new THREE.Mesh(geometry, material);
@@ -158,29 +212,27 @@ function init() {
 
   //
 
-  // stats = new Stats();
-  // container.appendChild(stats.dom);
+  stats = new Stats();
+  container.appendChild(stats.dom);
 
-  // GUI;
+  GUI;
 
-  // var gui = new GUI();
+  var gui = new GUI();
 
-  // var folder = gui.addFolder('Sky');
-  // folder.add(parameters, 'inclination', 0, 0.05, 0.0001).onChange(updateSun);
-  // folder.add(parameters, 'azimuth', 0, 1, 0.0001).onChange(updateSun);
-  // folder.open();
+  var folder = gui.addFolder('Sky');
+  folder.add(parameters, 'inclination', 0, 0.05, 0.0001).onChange(updateSun);
+  folder.add(parameters, 'azimuth', 0, 1, 0.0001).onChange(updateSun);
+  folder.open();
 
-  // var uniforms = water.material.uniforms;
+  var uniforms = water.material.uniforms;
 
-  // var folder = gui.addFolder('Water');
-  // folder
-  //   .add(uniforms.distortionScale, 'value', 0, 8, 0.1)
-  //   .name('distortionScale');
-  // folder.add(uniforms.size, 'value', 0.1, 10, 0.1).name('size');
-  // folder.add(uniforms.alpha, 'value', 0.9, 1, 0.001).name('alpha');
-  // folder.open();
-
-  //
+  var folder = gui.addFolder('Water');
+  folder
+    .add(uniforms.distortionScale, 'value', 0, 8, 0.1)
+    .name('distortionScale');
+  folder.add(uniforms.size, 'value', 0.1, 10, 0.1).name('size');
+  folder.add(uniforms.alpha, 'value', 0.9, 1, 0.001).name('alpha');
+  folder.open();
 
   window.addEventListener('resize', onWindowResize, false);
 }
