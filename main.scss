@@ -1,0 +1,405 @@
+@import './styles/_variables.scss';
+@import './styles/_breakpoints.scss';
+
+*,
+body,
+div {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  min-height: 100%;
+  min-height: -webkit-fill-available;
+}
+
+#info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+}
+
+#container {
+  min-height: 100%;
+  min-width: 100%;
+  position: absolute;
+}
+
+#container:active {
+  cursor: grabbing;
+}
+
+.background-container {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: -2;
+}
+
+@keyframes circleRotate {
+  from {
+    transform: rotate(-20deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.background-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  max-width: 35%;
+  max-height: 35%;
+  z-index: -2;
+  animation: circleRotate 30s linear;
+}
+
+/* MENU BAR */
+
+.sidenav {
+  position: absolute;
+  top: 135px;
+  left: -400px;
+  color: white;
+  font-size: 24px;
+  transition: transform 0.5s ease;
+  z-index: 5;
+  height: 0;
+}
+
+.sidenav.open {
+  transform: translateX(calc(50vw + 200px));
+}
+
+@include tabletLandscape {
+  .sidenav {
+    top: 0;
+    left: -200px;
+    width: 200px;
+    height: 100%;
+  }
+
+  .sidenav.open {
+    transform: translateX(200px);
+  }
+}
+
+.menu-icon {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: 20px;
+  left: 20px;
+  z-index: 5;
+  fill: white;
+  transition: fill 0.3s;
+  &:hover {
+    fill: var(--brightyellow);
+    cursor: pointer;
+  }
+}
+
+@include mobilePortrait {
+  .menu-icon {
+    top: 24px;
+    left: 20px;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-family: 'Space Mono', monospace;
+  top: 4rem;
+  font-size: 12.5px;
+  transition: all 0.2s;
+  &:hover {
+    color: var(--medorange);
+    cursor: pointer;
+  }
+  display: inline-block;
+  margin: 0 0.4rem;
+}
+
+@include mobilePortrait {
+  .nav-link {
+    font-size: 1rem;
+  }
+}
+
+@include tabletLandscape {
+  .nav-link {
+    font-size: 1.5rem;
+    margin-left: 20px;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.link-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  height: 40px;
+  margin: 0 auto;
+  width: 400px;
+}
+
+@include mobilePortrait {
+  .link-container {
+    padding-bottom: 20px;
+  }
+}
+
+@include tabletLandscape {
+  .link-container {
+    text-align: left;
+    justify-content: flex-start;
+    flex-direction: column;
+    height: 100%;
+    width: 200px;
+    align-items: flex-start;
+    position: relative;
+    top: 150px;
+  }
+}
+
+.main-header {
+  font-family: 'Space Mono', monospace;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 0;
+  width: 100px;
+  color: white;
+  position: absolute;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0.75rem;
+}
+
+@include mobilePortrait {
+  .main-header {
+    width: 300px;
+    font-size: 2rem;
+  }
+}
+
+.header-link {
+  color: white;
+  text-decoration: none;
+  transition: all 0.5s;
+  &:hover {
+    color: var(--brightyellow);
+    cursor: pointer;
+  }
+}
+
+.header-container {
+  width: 400px;
+  height: 100px;
+  display: flex;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: center;
+  z-index: 1;
+}
+
+.socials-container {
+  display: block;
+  width: 280px;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  background-color: transparent;
+  position: relative;
+  top: 3rem;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 2rem auto 0;
+}
+
+@include mobilePortrait {
+  .socials-container {
+    width: 400px;
+    flex-direction: row;
+    margin: 0 auto;
+  }
+}
+
+.social-icon {
+  width: 20px;
+  height: 20px;
+  transition: all 0.2s;
+  fill: white;
+
+  &:hover {
+    fill: var(--medorange);
+    cursor: pointer;
+    transform: translateY(-1px);
+  }
+}
+
+.youtube-logo,
+.soundcloud-logo {
+  width: 24px;
+  height: 24px;
+}
+
+.instagram-logo {
+  margin-top: 1px;
+}
+
+.soundcloud-logo {
+  margin-top: 1px;
+}
+
+@include mobilePortrait {
+  .social-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .youtube-logo,
+  .soundcloud-logo {
+    width: 28px;
+    height: 28px;
+  }
+
+  .instagram-logo {
+    margin-top: 3px;
+  }
+
+  .youtube-logo,
+  .soundcloud-logo {
+    margin-top: 2px;
+  }
+}
+
+/* ABOUT */
+
+.about-section {
+  display: block;
+  opacity: 0;
+  width: 90vw;
+  max-width: 500px;
+  background-color: #222222e5;
+  position: relative;
+  pointer-events: none;
+  left: 50vw;
+  top: 190px;
+  transform: translateX(-50%);
+  margin: 0 auto;
+  border: 2px solid white;
+  padding: 30px 28px 30px 30px;
+  color: white;
+  font-family: 'Space Mono', monospace;
+  transition: opacity 0.5s;
+  overflow-y: scroll;
+  height: 45%;
+  // max-height: 445px;
+  -ms-overflow-style: none;
+}
+
+@include mobileLandscape {
+  .about-section::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (min-height: 600px) and (max-width: 480px) {
+  .about-section {
+    min-height: 300px;
+  }
+}
+
+@include mobilePortrait {
+  .about-section {
+    padding: 50px;
+    top: 180px;
+    overflow-y: auto;
+    height: 70%;
+    max-height: 588px;
+  }
+}
+
+.about-section.open {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 90vw;
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.5s;
+  position: absolute;
+  overflow-y: scroll;
+}
+
+@include mobileLandscape {
+  .about-section.open {
+    max-width: 500px;
+    margin: auto;
+  }
+}
+
+.about-paragraph {
+  font-size: 0.7rem;
+}
+
+@include mobilePortrait {
+  .about-paragraph {
+    font-size: 1rem;
+  }
+}
+
+.about-link {
+  text-decoration: none;
+  color: var(--medorange);
+  transition: color 0.2s;
+  &:hover {
+    color: var(--brightyellow);
+    cursor: pointer;
+  }
+}
+
+.close-about-icon {
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  z-index: 6;
+  fill: white;
+  &:hover {
+    cursor: pointer;
+    color: red;
+  }
+}
+
+@include mobilePortrait {
+  .close-about-icon {
+    width: 14px;
+    height: 14px;
+    top: 1rem;
+    right: 1rem;
+  }
+}
