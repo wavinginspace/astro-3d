@@ -80,7 +80,7 @@ function init() {
   uniforms['mieCoefficient'].value = 0.005;
   uniforms['mieDirectionalG'].value = 0.8;
 
-  var parameters = {
+  let parameters = {
     distance: 400,
     inclination: 0.25,
     azimuth: 0.0375
@@ -88,21 +88,22 @@ function init() {
 
   let hour = new Date().getHours();
 
-  checkSun();
+  checkHour();
 
   setInterval(() => {
     if (hour < 24) {
+      console.log(hour);
       hour += 1;
     } else {
       hour = 0;
     }
-    checkSun();
-  }, 300);
+    checkHour();
+    updateSun();
+  }, 360000);
 
-  function checkSun() {
+  function checkHour() {
     if (hour >= 21 || hour <= 6) {
-      parameters = { ...parameters, azimuth: 0.5118 };
-      console.log('true');
+      parameters = { ...parameters, azimuth: 0.494 };
     } else if (hour > 6 && hour <= 7) {
       parameters = { ...parameters, azimuth: 0.0155 };
     } else if (hour > 7 && hour <= 8) {
@@ -137,8 +138,6 @@ function init() {
       parameters = { ...parameters, azimuth: 0.49 };
     }
   }
-
-  console.log(hour);
 
   var cubeCamera = new THREE.CubeCamera(0.1, 1, 512);
   cubeCamera.renderTarget.texture.generateMipmaps = true;
@@ -212,27 +211,31 @@ function init() {
 
   //
 
-  stats = new Stats();
-  container.appendChild(stats.dom);
+  // * CONTROLS START
 
-  GUI;
+  // stats = new Stats();
+  // container.appendChild(stats.dom);
 
-  var gui = new GUI();
+  // GUI;
 
-  var folder = gui.addFolder('Sky');
-  folder.add(parameters, 'inclination', 0, 0.05, 0.0001).onChange(updateSun);
-  folder.add(parameters, 'azimuth', 0, 1, 0.0001).onChange(updateSun);
-  folder.open();
+  // var gui = new GUI();
 
-  var uniforms = water.material.uniforms;
+  // var folder = gui.addFolder('Sky');
+  // folder.add(parameters, 'inclination', 0, 0.05, 0.0001).onChange(updateSun);
+  // folder.add(parameters, 'azimuth', 0, 1, 0.0001).onChange(updateSun);
+  // folder.open();
 
-  var folder = gui.addFolder('Water');
-  folder
-    .add(uniforms.distortionScale, 'value', 0, 8, 0.1)
-    .name('distortionScale');
-  folder.add(uniforms.size, 'value', 0.1, 10, 0.1).name('size');
-  folder.add(uniforms.alpha, 'value', 0.9, 1, 0.001).name('alpha');
-  folder.open();
+  // var uniforms = water.material.uniforms;
+
+  // var folder = gui.addFolder('Water');
+  // folder
+  //   .add(uniforms.distortionScale, 'value', 0, 8, 0.1)
+  //   .name('distortionScale');
+  // folder.add(uniforms.size, 'value', 0.1, 10, 0.1).name('size');
+  // folder.add(uniforms.alpha, 'value', 0.9, 1, 0.001).name('alpha');
+  // folder.open();
+
+  // * CONTROLS END
 
   window.addEventListener('resize', onWindowResize, false);
 }
