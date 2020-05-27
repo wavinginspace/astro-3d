@@ -211,7 +211,7 @@ function init() {
 
   //
 
-  // * CONTROLS START
+  // * CONTROLS START *
 
   // stats = new Stats();
   // container.appendChild(stats.dom);
