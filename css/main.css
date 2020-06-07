@@ -352,13 +352,22 @@ body {
   .soundcloud-logo {
     width: 28px;
     height: 28px;
+    margin-top: 1px;
+  }
+  .spotify-logo {
+    margin-top: 1px;
   }
   .instagram-logo {
     margin-top: 3px;
   }
-  .youtube-logo,
-  .soundcloud-logo {
-    margin-top: 2px;
+  .linktree-logo {
+    width: 28px;
+    height: 28px;
+    margin-top: 4px;
+  }
+  .bandcamp-logo {
+    width: 28px;
+    height: 28px;
   }
 }
 
